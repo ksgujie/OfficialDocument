@@ -19,6 +19,7 @@
 通过主菜单「设置 → 导出当前所有设置 (注册表 .reg)」导出注册表文件，默认保存到程序所在目录（编译后为 EXE 目录，未编译为脚本目录），文件名为 `公文排版设置.reg`。换电脑后双击该 `.reg` 文件导入，再重新启动程序即可恢复全部设置（含整体配置方案、字体字号和当前方案）。
 
 ## 当前版本
+- `6.8.34.ahk`：**副标题与主送机关不缩进**。① `AdjustBuiltinStyleSpacing(doc)` 中副标题（-75）的 `CharacterUnitFirstLineIndent` 设为 0，避免副标题被误加首行缩进；`GetOrCreateMainAddresseeStyle()` 在获取已存在的“主送机关”样式时也把首行缩进重置为 0，避免旧文档残留缩进。正文（-1）与标题1~4（-2~-5）仍保持首行缩进 2 字符。② **主窗口页眉信息加粗**：`uiInfoHeader`（页眉处理方式摘要）设为粗体，更显著。
 
 - `6.8.33.ahk`：**标题与正文首行缩进统一**。① `AdjustBuiltinStyleSpacing(doc)` 在调整内置样式时，同时写入样式本身的首行缩进：正文（wdStyleNormal、-1）与标题1~4（wdStyleHeading1~4、-2~-5）的 `CharacterUnitFirstLineIndent` 设为 2（2 字符），`FirstLineIndent` 设为 0。② 这样正文与标题套用样式后，首行缩进即由样式继承；用户在 Word/WPS 样式框里点“正文”“标题 1”等时，首行缩进不会丢失。③ 其余样式化映射与 6.8.32 一致。
 - `6.8.32.ahk`**：修复标题字体被样式覆盖 + 全局变量未赋值错误**。① `AdjustBuiltinStyleSpacing(doc)` 不再依赖可能未赋值的全局 `ptMTitle/ptH1/...` 变量，而是在函数内部根据 `ActiveStyle` 重新用 `ParseFontSize()` 计算各级字号。② 先把文档内置样式（正文/标题/副标题/标题1~4）的字体、字号、加粗、段距、行距调整为方案参数，再把段落应用已调整好的样式，使标题字体等不会被样式自带的错误格式覆盖，也不会因全局变量未赋值而抛出“This global variable has not been assigned a value”。③ 其余样式化映射与 6.8.31 一致。

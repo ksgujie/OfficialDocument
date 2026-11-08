@@ -2,7 +2,7 @@
 
 基于 GB/T 9704-2012 的 `.doc`/`.docx` 排版工具。仓库里是**两个互不依赖的工具**；没有测试/lint/CI，也没有一键构建脚本（PDF 后端打包/编译是手工命令），Word/WPS 操作全部走 COM。
 
-1. 排版引擎：单个按版本号命名的 AHK 脚本，当前 `6.8.31.ahk`。
+1. 排版引擎：单个按版本号命名的 AHK 脚本，当前 `6.8.32.ahk`。
 2. PDF 加页码：AHK 外壳 + Python 后端。当前版本 `v1.18`（在 v1.17 三态基础上给两个下拉框加分组分隔线）；`v1.15` 与 `v1.16` 是并行回退分支（`v1.15` 的 `.exe` 已不在工作区），`v1.17` 保留作上一版回退。
 3. `agents-md-for-repo.json` 是会话导出的 JSON（2.7 MB），不属于项目，别提交。
 
@@ -41,10 +41,10 @@ AutoHotkey 和 Git 都不在 PATH；没有测试套件，验证靠“跑一遍 +
 
 ```powershell
 # 排版引擎 GUI（会弹窗交给用户测试）
-& 'C:\AutoHotkey\v2\AutoHotkey64.exe' '6.8.31.ahk'
+& 'C:\AutoHotkey\v2\AutoHotkey64.exe' '6.8.32.ahk'
 
 # 排版引擎静默批量（文件或文件夹；文件夹只扫第一层，会真的改文档并生成备份/PDF/日志）
-& 'C:\AutoHotkey\v2\AutoHotkey64.exe' '6.8.31.ahk' '某副本.docx'
+& 'C:\AutoHotkey\v2\AutoHotkey64.exe' '6.8.32.ahk' '某副本.docx'
 
 # PDF 工具：语法检查 / 开窗口 / 静默处理
 cmd /c "C:\AutoHotkey\v2\AutoHotkey64.exe /validate ""PDF 加页码工具 v1.18.ahk"" & echo EXIT=%errorlevel%"
